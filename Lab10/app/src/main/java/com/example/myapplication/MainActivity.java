@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String TAG = "";
+    //private static final String TAG = "";
     FirebaseFirestore db;
     Button b,m;
     @Override
@@ -51,10 +51,12 @@ public class MainActivity extends AppCompatActivity {
         Calendar calendario = Calendar.getInstance();
         Date date = new Date();
         map.put("fecha", date.getDay()+"/"+date.getMonth()+"/"+date.getYear());
-        map.put("hora",calendario.get(Calendar.HOUR_OF_DAY)+ ":"+calendario.get(Calendar.MINUTE)+ ":"+calendario.get(Calendar.SECOND));
+        map.put("hora",calendario.get(Calendar.HOUR_OF_DAY)+ ":"+calendario.get(Calendar.MINUTE)+
+                ":"+calendario.get(Calendar.SECOND));
         map.put("latitud",2134564);
         map.put("longitud",12341564);
         map.put("velocidad",5);
+
         db.collection("Trayectoria").document().set(map);
     }
 }

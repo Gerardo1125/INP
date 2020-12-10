@@ -25,12 +25,24 @@ public class MostrarDatos extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         Query query = mFire.collection("Trayectoria");
-        FirestoreRecyclerOptions<Ubicacion> firestoreRecyclerOptions = new FirestoreRecyclerOptions.Builder<Ubicacion>().setQuery(query,Ubicacion.class).build();
+        FirestoreRecyclerOptions<Ubicacion> firestoreRecyclerOptions =
+                new FirestoreRecyclerOptions.Builder<Ubicacion>()
+                .setQuery(query,Ubicacion.class).build();
 
         adapter = new Dato_Adapter(firestoreRecyclerOptions);
         adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
     }
 
+    @Override
+    protected void onStart(){
+        super.onStart();
+        adapter.startListening();
+    }
 
+    @Override
+    protected void onStop(){
+        super.onStop();
+        adapter.stopListening();
+    }
 }
